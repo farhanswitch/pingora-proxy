@@ -1,0 +1,12 @@
+[package]
+name = "proxy"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-trait = "0.1.79"
+pingora-core = "0.1.0"
+pingora-http = "0.1.0"
+pingora-proxy = "0.1.0"
+log = "0.4.21"
+env_logger = "0.9"
