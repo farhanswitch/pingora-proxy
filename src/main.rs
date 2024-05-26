@@ -118,6 +118,12 @@ fn main() {
         },
     );
     my_proxy.add_tcp("0.0.0.0:6191");
+    let cert_path = format!("{}/cert/server.crt", env!("CARGO_MANIFEST_DIR"));
+    let key_path = format!("{}/cert/server.key", env!("CARGO_MANIFEST_DIR")); 
+    let mut tls_settings =
+       pingora_core::listeners::TlsSettings::intermediate(&cert_path, &key_path).unwrap();
+    tls_settings.enable_h2();
+    my_proxy.add_tls_with_settings("0.0.0.0:7192", None, tls_settings);
     my_server.add_service(my_proxy);
 
     my_server.run_forever();
